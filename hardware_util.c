@@ -32,6 +32,7 @@ void apply_hardware(GRANDEvent *evnt, int iant)
     dax = det->SimMSPS/det->RawMSPS;
     while(i<det->SimPoints){
       det->RawADC[iarm][iraw] = (int)(ADC_muV*det->SimVoltage[iarm][i]);
+      //printf("Filling RawADC  %g %g\n",det->RawADC[iarm][iraw],ADC_muV*det->SimVoltage[iarm][i]);
       if(det->RawADC[iarm][iraw]>amax){
         imax = iraw;
         amax = det->RawADC[iarm][iraw];
@@ -45,7 +46,10 @@ void apply_hardware(GRANDEvent *evnt, int iant)
       i = iraw*dax;
     }
   }
-  if(amax>THRESADC) det->IsTriggered = true;
+  if(amax>THRESADC) {
+    //printf("A triggered detector %d\n",iant);
+    det->IsTriggered = true;
+  } 
   det->RawGPS.Second = det->SimGPS.Second;
   det->RawGPS.NanoSec = det->SimGPS.NanoSec + RandTime.Gaus(0,GPSRES);
   if( det->RawGPS.NanoSec>=GIGA){

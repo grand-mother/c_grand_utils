@@ -2,21 +2,18 @@
 
 
 typedef struct{
-  unsigned int Second;          //!< GPS seconds (hardware or simulation date)
+  long Second;          //!< GPS seconds (hardware or simulation date)
   unsigned int NanoSec; //!< GPS nanoseconds (hardware or simulation)
 }GPS;
 
 typedef struct{
   char EventName[80]; //!< event name (simulation)
   char EventID[80]; //!< event ID simulation/raw data
-  unsigned int RunNumber, EventNumber,EventType; //! specify event
   char Site[80];  //!< site for which the simulation was done/ at which data was taken
   char Date[80];  //!< date for which the simulation was done/at which data was taken
-  GPS EventTime; //! GPS info on the event time
   double Latitude;  //!< latitude of site (degrees)
   double Longitude; //!< longitude of site (degrees)
   double GroundAltitude;  //!< altitude of site (m)
-  float BCart[3]; //! Bfield in Cartesian  coordinates
   double BField;  //!< magnitude of B-field (uT)
   double BFieldIncl;  //!< inclination B field (degrees)
   double BFieldDecl;  //!< declination B-field (degrees)
@@ -26,13 +23,13 @@ typedef struct{
 
 typedef struct{
   char Primary[80]; //!< primary particle in simulation
-  float Energy;  //!< energy of primary particle (EeV)
-  float Zenith; //!< zenith angle incoming particle (degrees, 0 = coming from above)
-  float Azimuth; //!< azimuth angle primary particle (degrees, 0=coming from North)
+  double Energy;  //!< energy of primary particle (EeV)
+  double Zenith; //!< zenith angle incoming particle (degrees, 0 = coming from above)
+  double Azimuth; //!< azimuth angle primary particle (degrees, 0=coming from North)
   double XmaxDistance; //!< distance between Xmax and the core position
   double XmaxPosition[3]; //!<The Xmax coordinates (m) (x,y,z)
   double XmaxAltitude; //!< the altitude of Xmax (m) above the  Earth
-  float SlantXmax; //!< amount of atmosphere encountered by the shower/primary particle  until Xmax (g/cm^2)
+  double SlantXmax; //!< amount of atmosphere encountered by the shower/primary particle  until Xmax (g/cm^2)
   double InjectionAltitude; //!< altitude above Earth (m) at which primary particle was injected
   double EnergyInNeutrinos; //!< amount of energy in Neutrinos (EeV)
 }GRANDSimEventInfo;
@@ -77,7 +74,7 @@ typedef struct{
 }GRANDDetectorData;
 
 typedef struct{
-  unsigned int n_det; //!< number of detectors in the event
+  int n_det; //!< number of detectors in the event
   GRANDGenEventInfo GenEventInfo; //!< general information (site, atmosphere)
   GRANDSimEventInfo SimEventInfo; //!< simulation specific info
   GRANDRecEventInfo RecEventInfo; //!< reconstruction specific info
