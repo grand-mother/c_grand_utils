@@ -5,7 +5,7 @@ This file contains an implementation of the hardware (electronics except antenna
 #include "TRandom2.h"
 
 #define GRANDMSPS 500
-#define THRESADC 100
+#define THRESADC 50
 #define GPSRES 10
 #define GIGA 1000000000
 
